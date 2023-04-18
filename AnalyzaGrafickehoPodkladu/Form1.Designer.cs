@@ -33,6 +33,7 @@
             createMeritko = new Button();
             groupBox2 = new GroupBox();
             pictureBox1 = new PictureBox();
+            loadImageButton = new Button();
             groupBox1.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
             groupBox2.SuspendLayout();
@@ -52,6 +53,7 @@
             // 
             // flowLayoutPanel1
             // 
+            flowLayoutPanel1.Controls.Add(loadImageButton);
             flowLayoutPanel1.Controls.Add(createMeritko);
             flowLayoutPanel1.Dock = DockStyle.Fill;
             flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
@@ -62,7 +64,7 @@
             // 
             // createMeritko
             // 
-            createMeritko.Location = new Point(3, 3);
+            createMeritko.Location = new Point(3, 32);
             createMeritko.Name = "createMeritko";
             createMeritko.Size = new Size(139, 23);
             createMeritko.TabIndex = 0;
@@ -92,6 +94,16 @@
             pictureBox1.Click += pictureBox1_Click;
             pictureBox1.Paint += pictureBox1_Paint;
             // 
+            // loadImageButton
+            // 
+            loadImageButton.Location = new Point(3, 3);
+            loadImageButton.Name = "loadImageButton";
+            loadImageButton.Size = new Size(139, 23);
+            loadImageButton.TabIndex = 1;
+            loadImageButton.Text = "Načíst obrázek";
+            loadImageButton.UseVisualStyleBackColor = true;
+            loadImageButton.Click += loadImageButton_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -115,5 +127,6 @@
         private PictureBox pictureBox1;
         private FlowLayoutPanel flowLayoutPanel1;
         private Button createMeritko;
+        private Button loadImageButton;
     }
 }

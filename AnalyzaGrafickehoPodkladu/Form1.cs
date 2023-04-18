@@ -23,7 +23,7 @@ namespace AnalyzaGrafickehoPodkladu
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            switch(currentMode)
+            switch (currentMode)
             {
                 case MapModes.None:
                     break;
@@ -41,13 +41,25 @@ namespace AnalyzaGrafickehoPodkladu
                     MessageBox.Show("Nìco se šerednì pokazilo");
                     break;
             }
-            
+
             pictureBox1.Invalidate();
         }
 
         private void createMeritko_Click(object sender, EventArgs e)
         {
             currentMode = MapModes.ScaleSelect;
+        }
+
+        private void loadImageButton_Click(object sender, EventArgs e)
+        {
+            using(OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                if(openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    pictureBox1.ImageLocation = openFileDialog.FileName;
+                    pictureBox1.LoadAsync();
+                }
+            }
         }
     }
 
