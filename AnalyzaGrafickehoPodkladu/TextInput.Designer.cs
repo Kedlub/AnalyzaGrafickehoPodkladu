@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             label1 = new Label();
-            textBox1 = new TextBox();
+            inputText = new TextBox();
             button1 = new Button();
             SuspendLayout();
             // 
@@ -42,12 +42,12 @@
             label1.Text = "Něco se šeredně pokazilo";
             label1.TextAlign = ContentAlignment.TopCenter;
             // 
-            // textBox1
+            // inputText
             // 
-            textBox1.Location = new Point(12, 35);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(345, 23);
-            textBox1.TabIndex = 1;
+            inputText.Location = new Point(12, 35);
+            inputText.Name = "inputText";
+            inputText.Size = new Size(345, 23);
+            inputText.TabIndex = 1;
             // 
             // button1
             // 
@@ -57,14 +57,16 @@
             button1.TabIndex = 2;
             button1.Text = "Ok";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // TextInput
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(369, 120);
+            ControlBox = false;
             Controls.Add(button1);
-            Controls.Add(textBox1);
+            Controls.Add(inputText);
             Controls.Add(label1);
             MaximizeBox = false;
             MinimizeBox = false;
@@ -78,7 +80,7 @@
         #endregion
 
         private Label label1;
-        private TextBox textBox1;
         private Button button1;
+        public TextBox inputText;
     }
 }

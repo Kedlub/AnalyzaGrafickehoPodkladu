@@ -21,5 +21,11 @@ namespace AnalyzaGrafickehoPodkladu
         {
             label1.Text = title;
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.OK;
+            Close();
+        }
     }
 }

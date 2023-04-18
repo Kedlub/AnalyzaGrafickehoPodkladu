@@ -30,10 +30,10 @@
         {
             groupBox1 = new GroupBox();
             flowLayoutPanel1 = new FlowLayoutPanel();
+            loadImageButton = new Button();
             createMeritko = new Button();
             groupBox2 = new GroupBox();
             pictureBox1 = new PictureBox();
-            loadImageButton = new Button();
             groupBox1.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
             groupBox2.SuspendLayout();
@@ -62,6 +62,16 @@
             flowLayoutPanel1.Size = new Size(145, 404);
             flowLayoutPanel1.TabIndex = 0;
             // 
+            // loadImageButton
+            // 
+            loadImageButton.Location = new Point(3, 3);
+            loadImageButton.Name = "loadImageButton";
+            loadImageButton.Size = new Size(139, 23);
+            loadImageButton.TabIndex = 1;
+            loadImageButton.Text = "Načíst obrázek";
+            loadImageButton.UseVisualStyleBackColor = true;
+            loadImageButton.Click += loadImageButton_Click;
+            // 
             // createMeritko
             // 
             createMeritko.Location = new Point(3, 32);
@@ -89,20 +99,11 @@
             pictureBox1.Location = new Point(6, 22);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(607, 398);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
             pictureBox1.Click += pictureBox1_Click;
             pictureBox1.Paint += pictureBox1_Paint;
-            // 
-            // loadImageButton
-            // 
-            loadImageButton.Location = new Point(3, 3);
-            loadImageButton.Name = "loadImageButton";
-            loadImageButton.Size = new Size(139, 23);
-            loadImageButton.TabIndex = 1;
-            loadImageButton.Text = "Načíst obrázek";
-            loadImageButton.UseVisualStyleBackColor = true;
-            loadImageButton.Click += loadImageButton_Click;
             // 
             // Form1
             // 
@@ -113,6 +114,7 @@
             Controls.Add(groupBox1);
             Name = "Form1";
             Text = "Analýza";
+            WindowState = FormWindowState.Maximized;
             groupBox1.ResumeLayout(false);
             flowLayoutPanel1.ResumeLayout(false);
             groupBox2.ResumeLayout(false);
