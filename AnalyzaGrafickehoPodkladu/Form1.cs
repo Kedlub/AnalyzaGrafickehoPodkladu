@@ -40,7 +40,7 @@ namespace AnalyzaGrafickehoPodkladu
 
             foreach (Point p in debugPoints)
             {
-                graphics.FillEllipse(Brushes.Fuchsia, new Rectangle(p.X - 5, p.Y - 5, 10, 10));
+                graphics.FillEllipse(Brushes.Fuchsia, new Rectangle(p.X - 2, p.Y - 2, 4, 4));
             }
 
             Pen linePen = new Pen(Color.LightBlue, 2);
@@ -76,6 +76,7 @@ namespace AnalyzaGrafickehoPodkladu
             }
 
             polygonPerimeter = total;
+            polygonSizeLabel.Text = $"Velikost polygonu: {Math.Floor(polygonPerimeter)}";
             debugText += $"\n{Math.Floor(polygonPerimeter)}";
         }
 
@@ -100,7 +101,7 @@ namespace AnalyzaGrafickehoPodkladu
                     currentMode = MapModes.PolygonSelect;
                     break;
                 case MapModes.PolygonSelect:
-                    
+
                     //var point = pictureBox1.PointToClient(Cursor.Position);
                     points.Add(CheckIntersection(pictureBox1.PointToClient(Cursor.Position)));
                     recalculatePolygon();
@@ -146,6 +147,8 @@ namespace AnalyzaGrafickehoPodkladu
 
         private Point CheckIntersection(Point point)
         {
+            debugLines.Clear();
+            debugPoints.Clear();
             Point right = CheckIntersection(point, new Vector2(1, 0)); // Right
             Point left = CheckIntersection(point, new Vector2(-1, 0)); // Left
             Point down = CheckIntersection(point, new Vector2(0, 1)); // Down
@@ -155,7 +158,7 @@ namespace AnalyzaGrafickehoPodkladu
             var closestX = 9999;
             var closestY = 9999;
 
-            if(right != badPoint)
+            if (right != badPoint)
             {
                 var X = GetCenterBetween(point, right).X;
                 var distance = Math.Abs(X - point.X);
@@ -166,7 +169,7 @@ namespace AnalyzaGrafickehoPodkladu
                 }
             }
 
-            if(left != badPoint)
+            if (left != badPoint)
             {
                 var X = GetCenterBetween(point, left).X;
                 var distance = Math.Abs(X - point.X);
@@ -177,7 +180,7 @@ namespace AnalyzaGrafickehoPodkladu
                 }
             }
 
-            if(down != badPoint)
+            if (down != badPoint)
             {
                 var Y = GetCenterBetween(point, down).Y;
                 var distance = Math.Abs(Y - point.Y);
@@ -188,7 +191,7 @@ namespace AnalyzaGrafickehoPodkladu
                 }
             }
 
-            if(up != badPoint)
+            if (up != badPoint)
             {
                 var Y = GetCenterBetween(point, up).Y;
                 var distance = Math.Abs(Y - point.Y);
@@ -208,7 +211,7 @@ namespace AnalyzaGrafickehoPodkladu
 
             var subscanResult = CheckIntersectionSubscan(subPoint);
 
-            foreach(Point sub in subscanResult)
+            foreach (Point sub in subscanResult)
             {
                 debugPoints.Add(sub);
             }
@@ -220,7 +223,7 @@ namespace AnalyzaGrafickehoPodkladu
 
             bool rightSide = point.X < subPoint.X ? true : false;
 
-            if(right != badPoint && subscanResult[0] != badPoint)
+            if (right != badPoint && subscanResult[0] != badPoint)
             {
                 var vector = GetVector(right, subscanResult[0]);
                 debugLines.Add(new Line() { p1 = right, p2 = subscanResult[0] });
@@ -228,7 +231,7 @@ namespace AnalyzaGrafickehoPodkladu
                 normal = GetNormal(vector);
             }
 
-            if(left != badPoint && subscanResult[1] != badPoint)
+            if (left != badPoint && subscanResult[1] != badPoint)
             {
                 var vector = GetVector(left, subscanResult[1]);
                 debugLines.Add(new Line() { p1 = left, p2 = subscanResult[1] });
@@ -236,23 +239,31 @@ namespace AnalyzaGrafickehoPodkladu
                 normal = GetNormal(vector);
             }
 
-            if(!rightSide)
+            if (!rightSide)
             {
                 normal = -normal;
             }
 
-            if(down != badPoint && subscanResult[2] != badPoint)
+            float closestDistance = 99999;
+
+            if (down != badPoint && subscanResult[2] != badPoint)
             {
                 var vector = GetVector(down, subscanResult[2]);
                 debugLines.Add(new Line() { p1 = down, p2 = subscanResult[2] });
-                horizontalPoint = ToPoint(ToVector2(subscanResult[2]) + normal);
+                horizontalPoint = ToPoint(ToVector2(subscanResult[2]) - normal);
+                closestDistance = Vector2.Distance(ToVector2(point), ToVector2(horizontalPoint));
             }
 
-            if(up != badPoint && subscanResult[3] != badPoint)
+            if (up != badPoint && subscanResult[3] != badPoint)
             {
                 var vector = GetVector(up, subscanResult[3]);
                 debugLines.Add(new Line() { p1 = up, p2 = subscanResult[3] });
-                horizontalPoint = ToPoint(ToVector2(subscanResult[3]) + normal);
+                var hPoint = ToPoint(ToVector2(subscanResult[3]) + normal);
+                var distance = Vector2.Distance(ToVector2(point), ToVector2(hPoint));
+                if(distance < closestDistance)
+                {
+                    horizontalPoint = hPoint;
+                }
             }
 
 
@@ -260,7 +271,7 @@ namespace AnalyzaGrafickehoPodkladu
 
             if (verticalPoint == horizontalPoint)
             {
-                
+
             }
 
             return new Point(-1, -1);
@@ -283,7 +294,7 @@ namespace AnalyzaGrafickehoPodkladu
 
         private Point GetVectorIntersection(Point point1, Vector2 vector1, Point point2, Vector2 vector2)
         {
-            Vector2 n = new Vector2(CrossProduct(vector1, vector2), Vector2.Dot(vector1,vector2));
+            Vector2 n = new Vector2(CrossProduct(vector1, vector2), Vector2.Dot(vector1, vector2));
             float distance = CrossProduct(n, vector2 - vector1);
 
             if (distance == 0)
@@ -323,7 +334,7 @@ namespace AnalyzaGrafickehoPodkladu
             var moveCount = 0;
             while (true)
             {
-                if(moveCount > 40)
+                if (moveCount > 40)
                 {
                     break;
                 }
@@ -377,6 +388,16 @@ namespace AnalyzaGrafickehoPodkladu
                     pictureBox1.DrawToBitmap(pictureBitmap, pictureBox1.ClientRectangle);
                 }
             }
+        }
+
+        private void newSelectionButton_Click(object sender, EventArgs e)
+        {
+            points.Clear();
+            debugPoints.Clear();
+            debugLines.Clear();
+            polygonPerimeter = 0;
+            polygonSizeLabel.Text = "Velikost polygonu: 0";
+            pictureBox1.Invalidate();
         }
     }
 

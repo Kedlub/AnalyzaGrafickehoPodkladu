@@ -32,6 +32,8 @@
             flowLayoutPanel1 = new FlowLayoutPanel();
             loadImageButton = new Button();
             createMeritko = new Button();
+            newSelectionButton = new Button();
+            polygonSizeLabel = new Label();
             groupBox2 = new GroupBox();
             pictureBox1 = new PictureBox();
             groupBox1.SuspendLayout();
@@ -55,6 +57,8 @@
             // 
             flowLayoutPanel1.Controls.Add(loadImageButton);
             flowLayoutPanel1.Controls.Add(createMeritko);
+            flowLayoutPanel1.Controls.Add(newSelectionButton);
+            flowLayoutPanel1.Controls.Add(polygonSizeLabel);
             flowLayoutPanel1.Dock = DockStyle.Fill;
             flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
             flowLayoutPanel1.Location = new Point(3, 19);
@@ -81,6 +85,25 @@
             createMeritko.Text = "Vytvořit měřítko";
             createMeritko.UseVisualStyleBackColor = true;
             createMeritko.Click += createMeritko_Click;
+            // 
+            // newSelectionButton
+            // 
+            newSelectionButton.Location = new Point(3, 61);
+            newSelectionButton.Name = "newSelectionButton";
+            newSelectionButton.Size = new Size(139, 23);
+            newSelectionButton.TabIndex = 2;
+            newSelectionButton.Text = "Nový výběr";
+            newSelectionButton.UseVisualStyleBackColor = true;
+            newSelectionButton.Click += newSelectionButton_Click;
+            // 
+            // polygonSizeLabel
+            // 
+            polygonSizeLabel.Location = new Point(3, 87);
+            polygonSizeLabel.Name = "polygonSizeLabel";
+            polygonSizeLabel.Size = new Size(139, 24);
+            polygonSizeLabel.TabIndex = 3;
+            polygonSizeLabel.Text = "Velikost polygonu: 0";
+            polygonSizeLabel.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // groupBox2
             // 
@@ -130,5 +153,7 @@
         private FlowLayoutPanel flowLayoutPanel1;
         private Button createMeritko;
         private Button loadImageButton;
+        private Button newSelectionButton;
+        private Label polygonSizeLabel;
     }
 }
