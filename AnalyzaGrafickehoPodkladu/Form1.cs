@@ -75,6 +75,12 @@ namespace AnalyzaGrafickehoPodkladu
                 lastPoint = point;
             }
 
+            if(points.Count > 2)
+            {
+                var distance = Convert.ToDecimal(Vector2.Distance(new Vector2(points[0].X, points[0].Y), new Vector2(points[points.Count - 1].X, points[points.Count - 1].Y)));
+                total += distance / mapScale;
+            }
+
             polygonPerimeter = total;
             polygonSizeLabel.Text = $"Velikost polygonu: {Math.Floor(polygonPerimeter)}";
             debugText += $"\n{Math.Floor(polygonPerimeter)}";
